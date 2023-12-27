@@ -1,66 +1,61 @@
 "use client";
 
-import { useAlert } from "next-alert";
-import { Alerts } from "next-alert";
+import { useAlert, Alerts, AlertDirection, AlertPosition  } from "next-alert";
 import { useState } from "react";
 
 const Box = () => {
 	const { addAlert } = useAlert();
 	const [timer, setTimer] = useState(3000);
-	const [position, setPosition] = useState<"top-left"
-    | "top-right"
-    | "bottom-left"
-    | "bottom-right"
-    | "center-top"
-    | "center-bottom">("top-right");
-	const [direction, setDirection] = useState<"right" | "left" | "top" | "bottom" | undefined>("right");
+	const [position, setPosition] = useState<AlertPosition>("top-right");
+	const [direction, setDirection] = useState<AlertDirection>("right");
 
 	return (
-		<>
-		<div className="relative">
+		<div className="w-screen h-screen flex justify-center items-center overflow-hidden">
+		<div className="relative p-8 rounded-lg backdrop-blur shadow shadow-white">
+			<h1 className="text-center text-2xl lg:text-4xl font-semibold mt-4 mb-8 text-white">Next-Alert Demo ❤</h1>
 			<div className="flex flex-row gap-2">
 				<button
 					onClick={() => {
 						addAlert(
-							"Notification",
-							"Hello, this is a notification!sa dsa,dls,adlksal dksadlskadlsakdl;skdlsadk; sadk;asldk;saldk",
+							"Information",
+							"Hello, this is a notification!",
 							"info",
 						);
 					}}
-					className="bg-blue-500 p-2 rounded-md text-white"
+					className="bg-blue-500 p-2 rounded-md text-white w-20"
 				>
 					Info
 				</button>
 				<button
 					onClick={() => {
 						addAlert(
-							"Notification",
+							"Success",
 							"Hello, this is a notification!",
 							"success",
 
 						);
 					}}
-					className="bg-green-500 p-2 rounded-md text-white"
+					className="bg-green-500 p-2 rounded-md text-white w-20"
 				>
 					Success
 				</button>
 				<button
 					onClick={() => {
 						addAlert(
-							"Notification",
+							"Warning",
 							"Hello, this is a notification!",
 							"warning",
 						);
 					}}
-					className="bg-yellow-500 p-2 rounded-md text-white"
+					className="bg-yellow-500 p-2 rounded-md text-white w-20"
 				>
 					Warning
 				</button>
 				<button
 					onClick={() => {
-						addAlert("Notification", "Hello, this is a notification!", "error");
+						addAlert("Error", "Hello, this is a notification!", "error");
 					}}
-					className="bg-red-500 p-2 rounded-md text-white"
+					className="bg-red-500 p-2 rounded-md text-white w-20"
 				>
 					Error
 				</button>
@@ -89,13 +84,13 @@ const Box = () => {
 				}}
 				/>
 				<label htmlFor="direction" className="text-white ">Direction</label>
-				<select name="direction" id="" className="text-neutral-700 rounded-lg w-30 p-3 h-12"
+				<select name="direction" id="" defaultValue="right" className="text-neutral-700 rounded-lg w-30 p-3 h-12"
 				onChange={(e) => {
 					// @ts-ignore
 					setDirection(e.target.value);
 				}}
 				>
-					<option value="right" selected>Right</option>
+					<option value="right">Right</option>
 					<option value="left">Left</option>
 					<option value="top">Top</option>
 					<option value="bottom">Bottom</option>
@@ -124,7 +119,7 @@ const Box = () => {
 					/>
 				</svg>
 			</Alerts>
-			</>
+			</div>
 	);
 };
 
